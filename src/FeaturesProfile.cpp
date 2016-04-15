@@ -38,9 +38,9 @@ void FeaturesProfile::countOccurences(const std::vector< std::vector<std::string
 	std::vector<std::vector<double> > tmpResult;
 	double identitiesSum = vecUtil::sum(sequenceIdentityValues);
 	char nothing = 'A';
-	for (int i = 0; i < alignment[0].size();i++){
+	for (unsigned int i = 0; i < alignment[0].size();i++){
 		std::vector<double> profileColumn(listOfFeatures.size(),0);
-		for (int j = 0; j < alignment.size();j++){
+		for (unsigned int j = 0; j < alignment.size();j++){
 				for(int k = 1; k < 4; k++){
 					char alChar = alignment[j][i][k];
 					if (alChar != nothing){
@@ -65,9 +65,9 @@ void FeaturesProfile::countOccurences(const std::vector< std::vector<std::string
 void FeaturesProfile::countOccurences(const std::vector< std::vector<std::string> >& alignment, const std::vector<bool>& sequenceIdentity){
 	std::vector<std::vector<double> > tmpResult;
 	char nothing = 'A';
-	for (int i = 0; i < alignment[0].size();i++){
+	for (unsigned int i = 0; i < alignment[0].size();i++){
 		std::vector<double> profileColumn(listOfFeatures.size(),0);
-		for (int j = 0; j < alignment.size();j++){
+		for (unsigned int j = 0; j < alignment.size();j++){
 			for(int k = 1; k < 4; k++){
 				char alChar = alignment[j][i][k];
 				if (alChar != nothing){
@@ -87,9 +87,9 @@ void FeaturesProfile::countOccurences(const std::vector< std::vector<std::string
 void FeaturesProfile::countOccurences(const std::vector< std::vector<std::string> >& alignment, const std::vector<bool>& sequenceIdentity, double gapPenMod){
 	std::vector<std::vector<double> > tmpResult;
 	char nothing = 'A';
-	for (int i = 0; i < alignment[0].size();i++){
+	for (unsigned int i = 0; i < alignment[0].size();i++){
 		std::vector<double> profileColumn(listOfFeatures.size(),1);
-		for (int j = 0; j < alignment.size();j++){
+		for (unsigned int j = 0; j < alignment.size();j++){
 			for(int k = 1; k < 4; k++){
 				char alChar = alignment[j][i][k];
 				if (alChar != nothing){
@@ -123,10 +123,7 @@ double FeaturesProfile::getElement(int position, std::string featName){
 	return result;
 }
 double FeaturesProfile::getGapOpeningPenalty(int position, std::string featName){
-	int featuresIndex = findFeaturesIndex(featName);
 	double result = 1;
-	/*if (featuresIndex == -1) result = 1;
-	else */
 	if (position >= 0){
 		result = prfMatrix.at(0).at(position);	
 	}
@@ -145,7 +142,7 @@ double FeaturesProfile::getElement(int position, int featuresIndex){
 //function findFeaturesIndex - takes features' name, e.g. "phosphN"
 int FeaturesProfile::findFeaturesIndex(std::string featName){
 	int featuresIndex = -1;
-	for (int i = 0; i < listOfFeatures.size();i++){
+	for (unsigned int i = 0; i < listOfFeatures.size();i++){
 		if (featName == listOfFeatures[i]){
 			featuresIndex = i;
 			break;
@@ -158,8 +155,7 @@ std::string FeaturesProfile::name(std::string codon, int featureType){
 	std::string name;
 	if (featureType == 2){
 		std::string featChar = misc::char2str(codon[2]);
-		int featIndex;
-		for (int i = 0; i < listOfFeatures.size();i++){
+		for (unsigned int i = 0; i < listOfFeatures.size();i++){
 			if (featChar == listOfFeatureCodes[i]){
 				name = listOfFeatures[i];
 				break;
@@ -172,7 +168,7 @@ std::string FeaturesProfile::name(std::string codon, int featureType){
 void FeaturesProfile::expandListOfFeatures(const std::vector< std::string >& sequence){
 	std::string featureToAdd="";
 	char nothing = 'A';
-	for (int j = 0; j < sequence.size(); j++){
+	for (unsigned int j = 0; j < sequence.size(); j++){
 		char alChar = sequence.at(j).at(2);
 		if (alChar != nothing){  										//means there is a domain on jth residue
 			featureToAdd = "domain";
@@ -184,8 +180,8 @@ void FeaturesProfile::expandListOfFeatures(const std::vector< std::string >& seq
 	}
 }
 void FeaturesProfile::printProfile(){
-	for (int i = 0; i < prfMatrix.size(); i++){
-		for (int j = 0; j < prfMatrix.at(0).size();j++){
+	for (unsigned int i = 0; i < prfMatrix.size(); i++){
+		for (unsigned int j = 0; j < prfMatrix.at(0).size();j++){
 			std::cout << prfMatrix.at(i).at(j) << " ";
 		}
 		std::cout << std::endl;
@@ -194,4 +190,3 @@ void FeaturesProfile::printProfile(){
 std::vector<std::vector<double> > FeaturesProfile::getMatrix(){
 	return prfMatrix;
 }
-

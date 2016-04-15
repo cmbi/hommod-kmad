@@ -48,7 +48,6 @@ std::vector<std::string> Sequences::performMSA(Profile *outputProfile,int penalt
 	sequenceIdentity.push_back(true);		//to build the first profile based only on the first sequence
 	std::string alNoLower;
 	std::string alWithLower;
-	bool flag = false;
 	for (int i = 1; i < seqNr; i++){
 		pseudoProfile.printProfile();
 		alignPairwise(&alNoLower,&alWithLower,sequences.at(i).at(1),pseudoProfile,penalty,i,verbose);
@@ -87,7 +86,7 @@ std::vector<std::string> Sequences::performMSAencoded(std::vector<std::vector<do
 //function calcIdentity
 double Sequences::calcIdentity(const std::string& alignedSequence){
 	double identicalResidues=0;
-	for (int i = 0; i < alignedSequence.size(); i++){
+	for (unsigned int i = 0; i < alignedSequence.size(); i++){
 		if (alignedSequence[i]==sequences.at(0)[1][i]){
 			identicalResidues++;
 		}
@@ -97,7 +96,7 @@ double Sequences::calcIdentity(const std::string& alignedSequence){
 //function calcIdentity for ENCODED SEQUENCES						CHANGE IT SO THAT IT WORKS FOR ENCODED
 double Sequences::calcIdentity(const std::vector<std::string>& alignedSequence){
 	double identicalResidues=0;
-	for (int i = 0; i < alignedSequence.size(); i++){
+	for (unsigned int i = 0; i < alignedSequence.size(); i++){
 		if (alignedSequence[i][0]==sequencesEncoded.at(0)[1][i][0]){
 			identicalResidues++;
 		}
@@ -120,7 +119,7 @@ void Sequences::removeGaps(std::string *alignmentWithLowercase, std::string *ali
 	std::string newS2lower = "";
 	char gap = '-';
 	bool lowerFlag = false;
-	for (int i = 0; i < alignment.at(0).size(); i++){
+	for (unsigned int i = 0; i < alignment.at(0).size(); i++){
 		char s1char = s1[i];
 		if (s1char == gap){
 			if (newS2lower.size() > 0){
@@ -152,7 +151,7 @@ void Sequences::removeGaps(std::vector<std::string> *alignmentWithLowercase, std
 	std::vector<std::string> newS2lower;
 	char gap = '-';
 	bool lowerFlag = false;
-	for (int i = 0; i < alignment.at(0).size(); i++){
+	for (unsigned int i = 0; i < alignment.at(0).size(); i++){
 		char s1char = s1[i][0];
 		if (s1char == gap){
 			if (newS2lower.size() > 0){

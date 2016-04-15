@@ -12,8 +12,8 @@ bool vecUtil::contains(std::vector<std::string>& vec, std::string x){
 void vecUtil::transposeVec(std::vector< std::vector<int> >& vec){
 	std::vector< std::vector<int> > newVec;
 	std::vector<int> newRow;
-	for (int i = 0; i < vec.at(0).size(); i++){
-		for (int j = 0; j < vec.size(); j++){
+	for (unsigned int i = 0; i < vec.at(0).size(); i++){
+		for (unsigned int j = 0; j < vec.size(); j++){
 			newRow.push_back(vec.at(j).at(i));	
 		}
 		newVec.push_back(newRow);
@@ -26,8 +26,8 @@ void vecUtil::transposeVec(std::vector< std::vector<int> >& vec){
 void vecUtil::transposeVec(std::vector< std::vector<double> >& vec){
 	std::vector< std::vector<double> > newVec;
 	std::vector<double> newRow;
-	for (int i = 0; i < vec.at(0).size(); i++){
-		for (int j = 0; j < vec.size(); j++){
+	for (unsigned int i = 0; i < vec.at(0).size(); i++){
+		for (unsigned int j = 0; j < vec.size(); j++){
 			newRow.push_back(vec.at(j).at(i));	
 		}
 		newVec.push_back(newRow);
@@ -37,21 +37,21 @@ void vecUtil::transposeVec(std::vector< std::vector<double> >& vec){
 }
 void vecUtil::divideVectorByAScalar(std::vector<double>& vec, int scalar){
 	std::vector<double> result;
-	for (int i = 0; i < vec.size(); i++){
+	for (unsigned int i = 0; i < vec.size(); i++){
 		result.push_back(vec[i]/scalar);	
 	}
 	vec = result;
 }
 void vecUtil::divideVectorByAScalar(std::vector<double>& vec, double scalar){
 	std::vector<double> result;
-	for (int i = 0; i < vec.size(); i++){
+	for (unsigned int i = 0; i < vec.size(); i++){
 		result.push_back(vec[i]/scalar);	
 	}
 	vec = result;
 }
 void vecUtil::multiplyVectorByAScalar(std::vector<double>& vec, double scalar){
 	std::vector<double> result;
-	for (int i = 0; i < vec.size(); i++){
+	for (unsigned int i = 0; i < vec.size(); i++){
 		result.push_back(vec[i]*scalar);
 	}
 	vec = result;
@@ -59,9 +59,9 @@ void vecUtil::multiplyVectorByAScalar(std::vector<double>& vec, double scalar){
 //function addUp - takes 2D matrix, adds up elements from each column, returns a 1D vector
 std::vector<double> vecUtil::addUp(std::vector< std::vector<double> > vec){
 	std::vector<double> newVec;
-	for (int i = 0; i < vec[0].size(); i++){
+	for (unsigned int i = 0; i < vec[0].size(); i++){
 		double sum = 0;
-		for (int j = 0; j < vec.size(); j++){
+		for (unsigned int j = 0; j < vec.size(); j++){
 			sum += vec.at(j).at(i);
 		}
 		newVec.push_back(sum);
@@ -71,23 +71,23 @@ std::vector<double> vecUtil::addUp(std::vector< std::vector<double> > vec){
 //convertIntVectorToDoubleVector
 std::vector<double> vecUtil::convertIntVectorToDoubleVector(std::vector<int> vec){
 	std::vector<double> result;
-	for (int i = 0; i < vec.size();i++){
+	for (unsigned int i = 0; i < vec.size();i++){
 		result.push_back(double(vec.at(i)));
 	}
 	return result;
 }
 //function printDoubleVector
 void vecUtil::printDoubleVector(const std::vector<double>& vec){
-	for (int i = 0; i < vec.size(); i++){
+	for (unsigned int i = 0; i < vec.size(); i++){
 		std::cout << vec[i];
 	}
 	std::cout << "\n";
 }
 std::vector<std::string> vecUtil::flattenWithoutFeatures(const std::vector<std::vector<std::string> >& vec){
 	std::vector<std::string> result;
-	for (int i = 0; i < vec.size();i++){
+	for (unsigned int i = 0; i < vec.size();i++){
 		std::string newSeq = "";
-		for(int j = 0; j < vec[i].size(); j++){
+		for (unsigned int j = 0; j < vec[i].size(); j++){
 			newSeq+=vec[i][j][0];
 		}
 		result.push_back(newSeq);
@@ -96,9 +96,9 @@ std::vector<std::string> vecUtil::flattenWithoutFeatures(const std::vector<std::
 }
 std::vector<std::string> vecUtil::flatten(const std::vector<std::vector<std::string> >& vec){
 	std::vector<std::string> result;
-	for (int i = 0; i < vec.size();i++){
+	for (unsigned int i = 0; i < vec.size();i++){
 		std::string newSeq = "";
-		for(int j = 0; j < vec[i].size(); j++){
+		for(unsigned int j = 0; j < vec[i].size(); j++){
 			newSeq+=vec[i][j];
 		}
 		result.push_back(newSeq);
@@ -113,7 +113,7 @@ std::vector<std::string> vecUtil::push_front(std::vector<std::string> vec, std::
 }
 double vecUtil::sum(const std::vector<double>& vec){
 	double sum = 0;
-	for (int i = 0; i < vec.size(); i++){
+	for (unsigned int i = 0; i < vec.size(); i++){
 		sum += vec[i];
 	}
 	return sum;

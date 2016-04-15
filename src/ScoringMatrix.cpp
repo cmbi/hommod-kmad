@@ -87,21 +87,21 @@ void ScoringMatrix::calculateScores(std::string s2, Profile& prf, int debug){
 	std::string s1(prf.getMatrix().at(0).size()+1,'A');	//makes a pseudosequence of the length of the profile+1 (poly-A)
 	s2 = std::string("0").append(s2);
 	std::string s1String,s2String;
-	for (int i = 1; i < matrixV.size(); i++){
+	for (unsigned int i = 1; i < matrixV.size(); i++){
 		matrixV.at(i).at(0) = -10000000; //infinity
 		matrixH.at(i).at(0) = -10000000;
 		matrixG.at(i).at(0) = 0;	//makes gaps at the beginning of the vertical sequence (s1) free
 		//matrixG[i][0] = gapOpening+(i-1)*gapExtension;
 	}
-	for (int i = 1; i < matrixV[0].size(); i++){
+	for (unsigned int i = 1; i < matrixV[0].size(); i++){
 		matrixV.at(0).at(i) = -10000000;
 		matrixH.at(0).at(i) = 0;	//makes gaps at the end of the horizontal sequence (s2) free
 		//matrixH[0][i] = gapOpening+(i-1)*gapExtension;
 		matrixG.at(0).at(i) = -10000000;
 	}
 	double score1,score2,score3;
-	for (int i = 1; i < matrixV.size();i++){
-		for (int j = 1; j < matrixV.at(i).size(); j++){
+	for (unsigned int i = 1; i < matrixV.size();i++){
+		for (unsigned int j = 1; j < matrixV.at(i).size(); j++){
 			///V
 			score1 = matrixV.at(i-1).at(j-1) + prf.getElement(i-1,s2.at(j));
 			score2 = matrixG.at(i-1).at(j-1) + prf.getElement(i-1,s2.at(j));
@@ -123,21 +123,21 @@ void ScoringMatrix::calculateScores(std::vector<std::string> s2, Profile& prf, F
 	std::vector<std::string> s1 = misc::pseudoSequence(prf.getMatrix()[0].size()+1); //creating polyA pseudoSequence representing the profile, to know later where are the gaps in the profile
 	s2 = vecUtil::push_front(s2,"-AAA");
 	std::string s1String,s2String;
-	for (int i = 1; i < matrixV.size(); i++){
+	for (unsigned int i = 1; i < matrixV.size(); i++){
 		matrixV.at(i).at(0) = -10000000; //infinity
 		matrixH.at(i).at(0) = -10000000;
 		matrixG.at(i).at(0) = 0;	//makes gaps at the beginning of the vertical sequence (s1) free
 		//matrixG[i][0] = gapOpening+(i-1)*gapExtension;
 	}
-	for (int i = 1; i < matrixV[0].size(); i++){
+	for (unsigned int i = 1; i < matrixV[0].size(); i++){
 		matrixV.at(0).at(i) = -10000000;
 		matrixH.at(0).at(i) = 0;	//makes gaps at the end of the horizontal sequence (s2) free
 		//matrixH[0][i] = gapOpening+(i-1)*gapExtension;
 		matrixG.at(0).at(i) = -10000000;
 	}
 	double score1,score2,score3;
-	for (int i = 1; i < matrixV.size();i++){
-		for (int j = 1; j < matrixV.at(i).size(); j++){
+	for (unsigned int i = 1; i < matrixV.size();i++){
+		for (unsigned int j = 1; j < matrixV.at(i).size(); j++){
 			///V
 			score1 = matrixV.at(i-1).at(j-1) + prf.getElement(i-1,s2.at(j)[0]);
 			score2 = matrixG.at(i-1).at(j-1) + prf.getElement(i-1,s2.at(j)[0]);
@@ -218,9 +218,9 @@ void ScoringMatrix::nwAlignment(std::vector<std::string> *result,std::string s2,
 	int i = s1.length()-1;
 	int j = s2.length()-1;
 	std::string currentMatrix = "V";
-	int iteratorM = 10;
 	//if bestScore isn't in the lower right corner, then add gaps to newS1 or newS2
-	if (findBestScore().at(0) != matrixV.size()-1 || findBestScore().at(1) != matrixV.at(0).size()-1){
+	if ((unsigned)findBestScore().at(0) != matrixV.size()-1 ||
+                        (unsigned)findBestScore().at(1) != matrixV.at(0).size()-1){
 		i = findBestScore().at(0);
 		j = findBestScore().at(1);
 		for (int k = s1.length()-1; k > i; k--){
@@ -290,9 +290,9 @@ void ScoringMatrix::nwAlignment(std::vector<std::vector<std::string> > *result,s
 	int i = s1.size()-1;
 	int j = s2.size()-1;
 	std::string currentMatrix = "V";
-	int iteratorM = 10;
 	//if bestScore isn't in the lower right corner, then add gaps to newS1 or newS2
-	if (findBestScore().at(0) != matrixV.size()-1 || findBestScore().at(1) != matrixV.at(0).size()-1){
+	if ((unsigned)findBestScore().at(0) != matrixV.size()-1 ||
+                        (unsigned)findBestScore().at(1) != matrixV.at(0).size()-1){
 		i = findBestScore().at(0);
 		j = findBestScore().at(1);
 		for (int k = s1.size()-1; k > i; k--){

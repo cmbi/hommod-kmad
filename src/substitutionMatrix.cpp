@@ -26,7 +26,7 @@ int substitutionMatrix::getElement(char char1,char char2){
 //convert to profile format - creates a matrix 20 x sequence length, where nth column is a column from sbstMatrix for the amino acid on position n in the sequence
 std::vector< std::vector<double> > substitutionMatrix::convertToProfileFormat(std::string sequence){
 	std::vector< std::vector<double> > result(sequence.size());
-	for (int i = 0; i < result.size(); i++){
+	for (unsigned int i = 0; i < result.size(); i++){
 		int aAcidInt = findAminoAcidsNo(sequence[i]);
 		result.at(i)=vecUtil::convertIntVectorToDoubleVector(simScores.at(aAcidInt));//adds a column to the result(converted from int to double)
 	}
@@ -36,7 +36,7 @@ std::vector< std::vector<double> > substitutionMatrix::convertToProfileFormat(st
 //convert to profile format - creates a matrix 20 x sequence length, where nth column is a column from sbstMatrix for the amino acid on position n in the sequence ENCODED SEQUENCES
 std::vector< std::vector<double> > substitutionMatrix::convertToProfileFormat(std::vector<std::string> sequence){
 	std::vector< std::vector<double> > result(sequence.size());
-	for (int i = 0; i < result.size(); i++){
+	for (unsigned int i = 0; i < result.size(); i++){
 		int aAcidInt = findAminoAcidsNo(sequence[i][0]);
 		result.at(i)=vecUtil::convertIntVectorToDoubleVector(simScores.at(aAcidInt));//adds a column to the result(converted from int to double)
 	}
@@ -49,8 +49,8 @@ int substitutionMatrix::getElement(int i,int j){
 }
 //function printSbstMatrix - prints substitution matrix
 void substitutionMatrix::printSbstMatrix(){
-	for (int i=0; i < simScores.size();i++){
-		for (int j = 0; j < simScores.at(i).size();j++){
+	for (unsigned int i=0; i < simScores.size();i++){
+		for (unsigned int j = 0; j < simScores.at(i).size();j++){
 			std::cout << simScores.at(i).at(j);
 			std::cout << " ";
 		}
@@ -67,7 +67,7 @@ std::vector<int> substitutionMatrix::getColumn(int columnNo){
 //function findAminoAcidsNo - finds index of the given char aa amino acid
 int substitutionMatrix::findAminoAcidsNo(char aa){
 	int aAcidint = -1;
-	for (int i = 0; i < alphabet.size();i++){
+	for (unsigned int i = 0; i < alphabet.size();i++){
 		if (aa == alphabet[i]){
 			aAcidint = i;
 			break;

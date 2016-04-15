@@ -40,9 +40,9 @@ void Profile::createProfile(std::vector< std::vector<std::string> >& alignment,c
 void Profile::buildPseudoProfile(std::vector<std::string>& alignment, const std::vector<bool>& sequenceIdentity){
 	createProfile(alignment,sequenceIdentity);
 	std::vector< std::vector<double> > newProfile;
-	for (int i = 0; i < prfMatrix[0].size(); i++){
+	for (unsigned int i = 0; i < prfMatrix[0].size(); i++){
 		std::vector< std::vector<double> > columnsToAdd;
-		for(int j = 0; j < prfMatrix.size(); j++){
+		for (unsigned int j = 0; j < prfMatrix.size(); j++){
 			if (prfMatrix.at(j).at(i) != 0){
 				std::vector<double> columnForJ = vecUtil::convertIntVectorToDoubleVector(substitutionMatrix::getColumn(j));
 				vecUtil::multiplyVectorByAScalar(columnForJ, prfMatrix.at(j).at(i));
@@ -58,9 +58,9 @@ void Profile::buildPseudoProfile(std::vector<std::string>& alignment, const std:
 void Profile::buildPseudoProfile(std::vector< std::vector<std::string> >& alignment, const std::vector<bool>& sequenceIdentity, const std::vector<double>& sequenceIdentityValues, bool weightsModeOn){
 	createProfile(alignment,sequenceIdentity,sequenceIdentityValues,weightsModeOn);
 	std::vector< std::vector<double> > newProfile;
-	for (int i = 0; i < prfMatrix[0].size(); i++){
+	for (unsigned int i = 0; i < prfMatrix[0].size(); i++){
 		std::vector< std::vector<double> > columnsToAdd;
-		for(int j = 0; j < prfMatrix.size(); j++){
+		for(unsigned int j = 0; j < prfMatrix.size(); j++){
 			if (prfMatrix.at(j).at(i) != 0){
 				std::vector<double> columnForJ = vecUtil::convertIntVectorToDoubleVector(substitutionMatrix::getColumn(j));
 				vecUtil::multiplyVectorByAScalar(columnForJ, prfMatrix.at(j).at(i));
@@ -76,9 +76,9 @@ void Profile::buildPseudoProfile(std::vector< std::vector<std::string> >& alignm
 void Profile::countOccurences(std::vector< std::vector<double> >& result,std::vector<std::string>& alignment,const std::vector<bool>& sequenceIdentity){
 	std::vector< std::vector<double> > tmpResult;
 	int trueSequences = misc::countTrueValuesInVector(sequenceIdentity);
-	for (int i = 0; i < alignment[0].size(); i++){
+	for (unsigned int i = 0; i < alignment[0].size(); i++){
 		std::vector<double> profileColumn(20,0);
-		for (int j = 0; j < alignment.size(); j++){
+		for (unsigned int j = 0; j < alignment.size(); j++){
 			if (sequenceIdentity.at(j)){			//is it a sequence that I want to count in? (with identity > cutoff)
 				char seqChar(alignment.at(j).at(i));
 				if (seqChar != '-'){
@@ -91,7 +91,7 @@ void Profile::countOccurences(std::vector< std::vector<double> >& result,std::ve
 						profileColumn.at(7)+=0.5;
 					}
 					else if (seqChar == 'X'){
-						for (int k = 0; k < profileColumn.size();k++){
+						for (unsigned int k = 0; k < profileColumn.size();k++){
 							profileColumn.at(k)+=0.05;
 						}
 					}
@@ -111,9 +111,9 @@ void Profile::countOccurences(std::vector< std::vector<double> >& result,std::ve
 void Profile::countOccurences(std::vector< std::vector<double> >& result,std::vector< std::vector<std::string> >& alignment,const std::vector<bool>& sequenceIdentity){
 	std::vector< std::vector<double> > tmpResult;
 	int trueSequences = misc::countTrueValuesInVector(sequenceIdentity);
-	for (int i = 0; i < alignment[0].size(); i++){
+	for (unsigned int i = 0; i < alignment[0].size(); i++){
 		std::vector<double> profileColumn(20,0);
-		for (int j = 0; j < alignment.size(); j++){
+		for (unsigned int j = 0; j < alignment.size(); j++){
 			if (sequenceIdentity.at(j)){			//is it a sequence that I want to count in? (with identity > cutoff)
 				char seqChar(alignment.at(j).at(i)[0]);
 				if (seqChar != '-'){
@@ -126,7 +126,7 @@ void Profile::countOccurences(std::vector< std::vector<double> >& result,std::ve
 						profileColumn.at(7)+=0.5;
 					}
 					else if (seqChar == 'X'){
-						for (int k = 0; k < profileColumn.size();k++){
+						for (unsigned int k = 0; k < profileColumn.size();k++){
 							profileColumn.at(k)+=0.05;
 						}
 					}
@@ -146,9 +146,9 @@ void Profile::countOccurences(std::vector< std::vector<double> >& result,std::ve
 void Profile::countOccurences(std::vector< std::vector<double> >& result,std::vector< std::vector<std::string> >& alignment,const std::vector<bool>& sequenceIdentity, const std::vector<double>& sequenceIdentityValues){
 	std::vector< std::vector<double> > tmpResult;
 	double identitiesSum = vecUtil::sum(sequenceIdentityValues);
-	for (int i = 0; i < alignment[0].size(); i++){
+	for (unsigned int i = 0; i < alignment[0].size(); i++){
 		std::vector<double> profileColumn(20,0);
-		for (int j = 0; j < alignment.size(); j++){
+		for (unsigned int j = 0; j < alignment.size(); j++){
 			char seqChar(alignment.at(j).at(i)[0]);
 			if (seqChar != '-'){
 				if (seqChar == 'B'){ 		//either D or N, so I'll add half a point to both
@@ -160,7 +160,7 @@ void Profile::countOccurences(std::vector< std::vector<double> >& result,std::ve
 					profileColumn.at(7)+=0.5;
 				}
 				else if (seqChar == 'X'){
-					for (int k = 0; k < profileColumn.size();k++){
+					for (unsigned int k = 0; k < profileColumn.size();k++){
 						profileColumn.at(k)+=0.05*sequenceIdentityValues.at(j);
 					}
 				}
@@ -197,9 +197,9 @@ double Profile::getElement(int position, char aAcid){
     if (aAcidint != -1) {
       result = prfMatrix.at(aAcidint).at(position);
     } else {
-      result = 0;
-      for (int i = 0; i < prfMatrix.size(); i++){
-      result += 0.05*prfMatrix.at(i).at(position);
+            result = 0;
+            for (unsigned int i = 0; i < prfMatrix.size(); i++){
+                    result += 0.05*prfMatrix.at(i).at(position);
       }
     }
 	}
@@ -212,7 +212,7 @@ double Profile::getElement(int aAcidInt, int position){
 //function printProfile(int,int) - prints only columns from boundStart to boundEnd
 void Profile::printProfile(int boundStart, int boundEnd){
 	for (int i = boundStart; i < boundEnd; i++){
-		for (int j = 0; j < prfMatrix.at(0).size();j++){
+		for (unsigned int j = 0; j < prfMatrix.at(0).size();j++){
 			std::cout << prfMatrix.at(i).at(j) << " ";
 		}
 		std::cout << "\n";
@@ -220,8 +220,8 @@ void Profile::printProfile(int boundStart, int boundEnd){
 }
 //function printProfile - prints full profile
 void Profile::printProfile(){
-	for (int i = 0; i < prfMatrix.size(); i++){
-		for (int j = 0; j < prfMatrix.at(0).size();j++){
+	for (unsigned int i = 0; i < prfMatrix.size(); i++){
+		for (unsigned int j = 0; j < prfMatrix.at(0).size();j++){
 			std::cout << prfMatrix.at(i).at(j) << " ";
 		}
 		std::cout << "\n";

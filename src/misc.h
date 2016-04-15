@@ -6,4 +6,4 @@ namespace misc{
 	std::vector<std::string> pseudoSequence(int);
 	void printEncodedSeq(const std::vector<std::string>&);
 	std::string char2str(char);
-};
+}

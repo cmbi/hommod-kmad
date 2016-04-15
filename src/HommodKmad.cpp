@@ -7,8 +7,8 @@
 #include <string>
 namespace po = boost::program_options;
 int main(int argc, char *argv[]){
-	int codonLength, phosphScore,domainScore;
-	double identityCutOff, gapPenMod, gapPen, gapExt;
+	int codonLength;
+	double gapPenMod, gapPen, gapExt;
 	bool weightsModeOn = false;
 	std::string filename,verboseMode,outputPrefix;
 	po::options_description desc("Allowed options");

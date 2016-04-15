@@ -4,17 +4,10 @@
 *.o
 *.obj
 
-# Precompiled Headers
-*.gch
-*.pch
-
 # Compiled Dynamic libraries
 *.so
 *.dylib
 *.dll
-
-# Fortran module files
-*.mod
 
 # Compiled Static libraries
 *.lai
@@ -22,7 +15,45 @@
 *.a
 *.lib
 
+# http://www.gnu.org/software/automake
+Makefile
+# Makefile.in
+.deps/
+.dirstamp
+
+# automake
+configure
+config.status
+config.log
+autom4te.cache/
+autom4te.cache/output*
+autom4te.cache/traces*
+
+
 # Executables
 *.exe
 *.out
 *.app
+hommod_kmad
+
+.DS_Store
+
+# vim
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+*~
+
+# gcov
+*gcov
+*gcno
+*gcda
+coverage.info
+out/
+.coverage
+coverage.sh
+
+# rope
+.ropeproject/
