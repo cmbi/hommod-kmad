@@ -332,46 +332,46 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 shared_LDADD = $(BOOST_PROGRAM_OPTIONS_LIB) 
 shared_SOURCES = src/Sequences.cpp \
-		  src/ScoringMatrix.cpp \
-		  src/Profile.cpp \
-		  src/FeaturesProfile.cpp \
-		  src/substitutionMatrix.cpp \
-		  src/misc.cpp \
-		  src/txtProc.cpp \
-		  src/vecUtil.cpp \
-		  src/findVal.cpp
+  src/ScoringMatrix.cpp \
+  src/Profile.cpp \
+  src/FeaturesProfile.cpp \
+  src/substitutionMatrix.cpp \
+  src/misc.cpp \
+  src/txtProc.cpp \
+  src/vecUtil.cpp \
+  src/findVal.cpp
 
 include_HEADERS = src/Sequences.h \
-		  src/ScoringMatrix.h \
-		  src/Profile.h \
-		  src/FeaturesProfile.h \
-		  src/substitutionMatrix.h \
-		  src/misc.h \
-		  src/txtProc.h \
-		  src/vecUtil.h \
-		  src/findVal.h
+  src/ScoringMatrix.h \
+  src/Profile.h \
+  src/FeaturesProfile.h \
+  src/substitutionMatrix.h \
+  src/misc.h \
+  src/txtProc.h \
+  src/vecUtil.h \
+  src/findVal.h
 
 hommod_kmad_SOURCES = $(shared_SOURCES) \
-	       src/HommodKmad.cpp
+      src/HommodKmad.cpp
 
 hommod_kmad_LDADD = $(shared_LDADD)
 AUTOMAKE_OPTIONS = foreign
 @DEBUG_FALSE@AM_CPPFLAGS = -std=c++11 \
-@DEBUG_FALSE@	      -pedantic \
-@DEBUG_FALSE@	      -Wall \
-@DEBUG_FALSE@	      -Werror \
-@DEBUG_FALSE@	      -Wno-reorder \
-@DEBUG_FALSE@	      $(BOOST_CPPFLAGS) \
-@DEBUG_FALSE@	      -I$(srcdir)src/
+@DEBUG_FALSE@      -pedantic \
+@DEBUG_FALSE@      -Wall \
+@DEBUG_FALSE@      -Werror \
+@DEBUG_FALSE@      -Wno-reorder \
+@DEBUG_FALSE@      $(BOOST_CPPFLAGS) \
+@DEBUG_FALSE@      -I$(srcdir)src/
 
 @DEBUG_TRUE@AM_CPPFLAGS = -g3 -O0 \
-@DEBUG_TRUE@	      -std=c++11 \
-@DEBUG_TRUE@	      -pedantic \
-@DEBUG_TRUE@	      -Wall \
-@DEBUG_TRUE@	      -Werror \
-@DEBUG_TRUE@	      -Wno-reorder \
-@DEBUG_TRUE@	      $(BOOST_CPPFLAGS) \
-@DEBUG_TRUE@	      -I$(srcdir)src/
+@DEBUG_TRUE@      -std=c++11 \
+@DEBUG_TRUE@      -pedantic \
+@DEBUG_TRUE@      -Wall \
+@DEBUG_TRUE@      -Werror \
+@DEBUG_TRUE@      -Wno-reorder \
+@DEBUG_TRUE@      $(BOOST_CPPFLAGS) \
+@DEBUG_TRUE@      -I$(srcdir)src/
 
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-am
@@ -910,8 +910,8 @@ uninstall-am: uninstall-binPROGRAMS uninstall-includeHEADERS
 
 
 @HAVE_CPPCHECK_TRUE@cppcheck:
-@HAVE_CPPCHECK_TRUE@		$(CPPCHECK) --quiet --std=c++11 --enable=all \
-@HAVE_CPPCHECK_TRUE@			--suppress=missingIncludeSystem $(srcdir)/src
+@HAVE_CPPCHECK_TRUE@$(CPPCHECK) --quiet --std=c++11 --enable=all \
+@HAVE_CPPCHECK_TRUE@        --suppress=missingIncludeSystem $(srcdir)/src
 @HAVE_CPPCHECK_TRUE@check:	cppcheck
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.

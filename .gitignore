@@ -36,6 +36,8 @@ autom4te.cache/traces*
 *.app
 hommod_kmad
 
+Makefile
+
 .DS_Store
 
 # vim
