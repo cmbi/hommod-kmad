@@ -95,9 +95,9 @@ void Profile::countOccurences(std::vector< std::vector<double> >& result,std::ve
 							profileColumn.at(k)+=0.05;
 						}
 					}
-					else{	
+					else{
 						int aAcidInt = substitutionMatrix::findAminoAcidsNo(seqChar);
-						profileColumn.at(aAcidInt)++;				
+						profileColumn.at(aAcidInt)++;
 					}
 				}
 			}
@@ -130,9 +130,9 @@ void Profile::countOccurences(std::vector< std::vector<double> >& result,std::ve
 							profileColumn.at(k)+=0.05;
 						}
 					}
-					else{	
+					else{
 						int aAcidInt = substitutionMatrix::findAminoAcidsNo(seqChar);
-						profileColumn.at(aAcidInt)++;				
+						profileColumn.at(aAcidInt)++;
 					}
 				}
 			}
@@ -164,9 +164,9 @@ void Profile::countOccurences(std::vector< std::vector<double> >& result,std::ve
 						profileColumn.at(k)+=0.05*sequenceIdentityValues.at(j);
 					}
 				}
-				else{	
+				else{
 					int aAcidInt = substitutionMatrix::findAminoAcidsNo(seqChar);
-					profileColumn.at(aAcidInt)+=sequenceIdentityValues.at(j);				
+					profileColumn.at(aAcidInt)+=sequenceIdentityValues.at(j);
 				}
 			}
 		}
@@ -175,7 +175,7 @@ void Profile::countOccurences(std::vector< std::vector<double> >& result,std::ve
 	}
 	result = tmpResult;
 }
-//function countNonGaps - counts how many characters in alignment nth ('column' integer) column are not gaps 
+//function countNonGaps - counts how many characters in alignment nth ('column' integer) column are not gaps
 double Profile::countNonGaps(int column){
 	double sum = 0;
 	for (int i =0; i < 20; i++){
@@ -192,16 +192,19 @@ double Profile::getElement(int position, char aAcid){
 	else if (aAcid=='Z'){
 		result = 0.5*prfMatrix.at(6).at(position)+ 0.5*prfMatrix.at(7).at(position);
 	}
-	else {	
+        else if (aAcid=='X'){
+                result = 0;
+        }
+	else {
 		int aAcidint = substitutionMatrix::findAminoAcidsNo(aAcid);
-    if (aAcidint != -1) {
-      result = prfMatrix.at(aAcidint).at(position);
-    } else {
-            result = 0;
-            for (unsigned int i = 0; i < prfMatrix.size(); i++){
-                    result += 0.05*prfMatrix.at(i).at(position);
-      }
-    }
+                if (aAcidint != 20) {
+                        result = prfMatrix.at(aAcidint).at(position);
+                } else {
+                        result = 0;
+                        for (unsigned int i = 0; i < prfMatrix.size(); i++){
+                                result += 0.05*prfMatrix.at(i).at(position);
+                  }
+                }
 	}
 	return result;
 }
